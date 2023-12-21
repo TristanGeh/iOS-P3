@@ -13,9 +13,11 @@ struct WelcomeView: View {
         NavigationStack {
             VStack {
                 Image("TajMahal")
-                Spacer()
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .padding()
+                    .padding(.top)
                 VStack {
-                    Spacer()
                     Title()
                         .padding(.bottom, 20)
                     Spacer()
@@ -31,7 +33,7 @@ struct WelcomeView: View {
             } label : {
                 
                 Text("Accéder au menu")
-                    .frame(maxWidth: .infinity, maxHeight: 40)
+                    .frame(maxWidth: 300, maxHeight: 40)
                     .background(Color.customRed)
                     .font(.headline)
                     .foregroundColor(.white)

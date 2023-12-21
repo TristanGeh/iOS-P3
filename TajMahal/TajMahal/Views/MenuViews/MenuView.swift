@@ -13,8 +13,12 @@ struct MenuView: View {
     let viewModel: ViewModel = ViewModel()
     
     var body: some View {
-        List {
-            // À completer
+        List(viewModel.apetizerArray) { apetizer in
+            Text(apetizer.name)
+        }
+        
+        List(viewModel.mainCourseArray) { main in
+            Text(main.name)
         }
     }
 }
