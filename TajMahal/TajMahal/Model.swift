@@ -21,6 +21,7 @@ struct Dish: Identifiable {
     var description: String
     var allergens: String
     var ingredients: String
+    var price: String
     var spiceLevel: SpiceLevel
     var imageName: String
 }
