@@ -13,28 +13,51 @@ struct MenuView: View {
     let viewModel: ViewModel = ViewModel(spiceLevel: .hot)
     
     var body: some View {
-            NavigationSplitView {
-                    List(viewModel.apetizerArray) { apetizer in
-                        NavigationLink{
-                            DishDetail(dish: apetizer)
-                                
-                        } label: {
-                            DishView(dish: apetizer)
-                        }
-                        
-                    }
-                        List(viewModel.mainCourseArray) { main in
-                            NavigationLink{
-                                DishDetail(dish: main)
-                            }label: {
-                                DishView(dish: main)
+        NavigationView{
+            ScrollView{
+                Text("Menu")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .padding(.bottom, 15)
+                VStack(alignment: .leading){
+                    Text("Entrées")
+                        .font(.subheadline)
+                        .padding(.bottom, 3)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color.customGrey)
+                    ForEach(viewModel.apetizerArray) { apetizer in
+                        VStack {
+                            NavigationLink(destination: DishDetail(dish: apetizer)) {
+                                DishView(dish: apetizer)
                             }
+                            .buttonStyle(.plain)
                         }
-            } detail: {
-                Text("Choisissez un plât")
+                    }
+                }
+                .padding(.horizontal, 15)
+                .padding(.bottom, 17)
+                
+                VStack(alignment: .leading){
+                    Text("Plats Principaux")
+                        .font(.subheadline)
+                        .padding(.bottom, 3)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color.customGrey)
+                    ForEach(viewModel.mainCourseArray) { main in
+                        NavigationLink(destination: DishDetail(dish: main)) {
+                            DishView(dish: main)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.horizontal, 15)
             }
+            .background(Color.customBackground)
         }
+        
     }
+}
+
 
 
 
