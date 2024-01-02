@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-// Page d'accueil
 struct WelcomeView: View {
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack {
                 Image("TajMahal")
                     .resizable()
@@ -24,21 +23,18 @@ struct WelcomeView: View {
                     Informations()
                         .font(.system(size: 13))
                 }
-                    .foregroundColor(.customGrey)
-                    .padding()
-            }
-            
-            NavigationLink {
-                MenuView()
-            } label : {
+                .foregroundColor(.customGrey)
+                .padding()
                 
-                Text("Accéder au menu")
-                    .frame(maxWidth: 300, maxHeight: 40)
-                    .background(Color.customRed)
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding()
+                NavigationLink(destination: MenuView().navigationBarBackButtonHidden(true)) {
+                    Text("Accéder au menu")
+                        .frame(maxWidth: 300, maxHeight: 40)
+                        .background(Color.customRed)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .padding()
+                }
             }
         }
     }

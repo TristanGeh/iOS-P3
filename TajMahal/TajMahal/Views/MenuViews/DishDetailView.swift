@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct DishDetail: View {
+struct DishDetailView: View {
     let dish: Dish
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack{
@@ -47,12 +48,25 @@ struct DishDetail: View {
                 Text(dish.ingredients)
                     .fontWeight(.light)
             }
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                HStack {
+                    Image("Arrow")
+                    Text(dish.name)
+                        .font(.system(size: 23))
+                        .fontWeight(.semibold)
+                    
+                }
+            })
         }
         .padding()
         .foregroundColor(.customGrey)
+        
     }
 }
 
 #Preview {
-    DishDetail(dish: Dish(id: 1, name: "Samosas aux légumes", description: "Délicieux chaussons frits garnis de légumes épicés", allergens: "Farine de blé", ingredients: "Mélange de légumes (pommes de terre, petits pois, carottes), épices indiennes, pâte à samosa, huile", price: "5,50", spiceLevel: .light, imageName: "Samosas"))
+    DishDetailView(dish: Dish(id: 1, name: "Samosas aux légumes", description: "Délicieux chaussons frits garnis de légumes épicés", allergens: "Farine de blé", ingredients: "Mélange de légumes (pommes de terre, petits pois, carottes), épices indiennes, pâte à samosa, huile", price: "5,50", spiceLevel: .light, imageName: "Samosas"))
 }

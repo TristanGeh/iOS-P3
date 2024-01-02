@@ -21,20 +21,18 @@ struct DishView: View {
                 .padding(.vertical, 12)
                 .padding(.leading, 11)
             VStack(alignment: .leading) {
-                    Text(dish.name)
-                        .font(.system(size: 14))
-                        .fontWeight(.bold)
+                Text(dish.name)
+                    .font(.system(size: 14))
+                    .fontWeight(.bold)
                 
-                    Text(dish.description)
-                        .font(.system(size: 12))
-                        .padding(.top, 2)
-                        .padding(.bottom, 5)
+                Text(dish.description)
+                    .font(.system(size: 12))
+                    .padding(.top, 2)
+                    .padding(.bottom, 5)
+                    .padding(.trailing, 8)
                 HStack {
-                    // a mettre dans une view sup
-                    Text("\(dish.price)€")
-                        .font(.system(size: 12))
-                    Spacer()
-                    PepperView(viewModel: ViewModel(spiceLevel: dish.spiceLevel), spiceLevel: dish.spiceLevel)
+                    PriceView(dish: dish)
+                    
                 }
             }
             
@@ -45,7 +43,7 @@ struct DishView: View {
         .foregroundColor(.customGrey)
     }
 }
-    
+
 
 #Preview {
     VStack {

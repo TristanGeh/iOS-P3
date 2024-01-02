@@ -7,27 +7,23 @@
 
 import SwiftUI
 
-// Menu sous forme de liste
 struct MenuView: View {
-    // Référence vers le view model qui permet d'accéder aux tableaux d'entrées et de plats du menu
     let viewModel: ViewModel = ViewModel(spiceLevel: .hot)
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationView{
             ScrollView{
-                Text("Menu")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .padding(.bottom, 15)
                 VStack(alignment: .leading){
                     Text("Entrées")
                         .font(.subheadline)
+                        .padding(.top, 15)
                         .padding(.bottom, 3)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.customGrey)
                     ForEach(viewModel.apetizerArray) { apetizer in
                         VStack {
-                            NavigationLink(destination: DishDetail(dish: apetizer)) {
+                            NavigationLink(destination: DishDetailView(dish: apetizer)) {
                                 DishView(dish: apetizer)
                             }
                             .buttonStyle(.plain)
@@ -44,7 +40,7 @@ struct MenuView: View {
                         .fontWeight(.semibold)
                         .foregroundColor(Color.customGrey)
                     ForEach(viewModel.mainCourseArray) { main in
-                        NavigationLink(destination: DishDetail(dish: main)) {
+                        NavigationLink(destination: DishDetailView(dish: main)) {
                             DishView(dish: main)
                         }
                         .buttonStyle(.plain)
@@ -53,8 +49,15 @@ struct MenuView: View {
                 .padding(.horizontal, 15)
             }
             .background(Color.customBackground)
+            
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Image("Arrow")
+            })
+            .navigationBarTitle("Menu", displayMode: .inline)
         }
-        
     }
 }
 
